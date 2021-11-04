@@ -1,0 +1,20 @@
+Preprocess each point to add a reference to the next point further horizontally and closer vertically, and the value/cost of the points in the range between the point and the initial range. Also include the number of points in the middle range strictly underneath this range.
+Put the points strictly above or below the range into two sorted arrays, of increasing distance from the range.
+Follow d = disparity jump pointers in one direction, building a vertical range.
+Mark this as an potential optimal range, recording it's bounds and it's Jaccard Similarity.
+Subtract one JP from this range.
+Find the closest point above the bottom of the range and below the top of the range.
+For each side, add the next pointer to the right of the initial reference pointers either high or low on each side. Continue adding in this direction on each side until you reach a limit.
+Mark the number of points to be added each side to decrease disparity and how much it decreases disparity.
+Follow these pointers for the minimum of 1 disparity.
+Add this range to the potential optimal range, recording it's bounds and it's Jaccard Similarity.
+Repeat this process until all JP have been removed.
+Then subtract one JP from the top and add it to the bottom and repeat the previous loop until the initial range is all jump pointers beneath.
+Return the optimal fair range.
+
+
+Preprocess the points above and below the range into sorted arrays.
+Preprocess the sorted arrays into lists of jump pointers.
+Create disparity^2(d-1) objects. Each object should have the right and left inward jump pointers, the right and left outward jump pointers, the righht and left current inward value, the right and left current outward value, the right and left value of the previous inward jump pointer, and the right and left value of the previous outward jump pointer.
+Sort the points to the right side of the initial range in ascending order.
+Add all the points to the right side of the initial range to each of the disparity^2 buckets for which 
