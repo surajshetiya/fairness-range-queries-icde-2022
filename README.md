@@ -25,6 +25,9 @@ To execute coverage based paper[2] to compare our measure with naviagate to the 
 
 Change the postgres credentials in the script to work with the database.
 
+Please reach out to us at suraj.shetiya@mavs.uta.edu or iswift2@uic.edu in case of doubts with code.
+
 [1] Fairness-Aware Range Queries for Selecting Unbiased Data
+
 [2] Coverage-based Rewriting for Data Preparation
 
