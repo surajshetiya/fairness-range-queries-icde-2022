@@ -407,11 +407,11 @@ class RangeTree {
             }
 
             rangeNode *startY = findPoint(current, minY, 1);
-            while (startY != nullptr && (inclusiveYMin ? startY->point.coordinates[1] <= minY : startY->point.coordinates[1] < minY)) {
+            while (startY != nullptr && (inclusiveYMin ? startY->point.coordinates[1] < minY : startY->point.coordinates[1] <= minY)) {
                 startY = next(startY);
             }
             rangeNode *endY = findPoint(current, maxY, 1);
-            while (endY != nullptr && (inclusiveYMax ? endY->point.coordinates[1] >= maxY : endY->point.coordinates[1] > maxY)) {
+            while (endY != nullptr && (inclusiveYMax ? endY->point.coordinates[1] > maxY : endY->point.coordinates[1] >= maxY)) {
                 endY = prev(endY);
             }
 
@@ -748,11 +748,11 @@ class RangeTree {
 
             rangeNode *startX = findPoint(root, startXDimension, 0);
 
-            while (startX != nullptr && (r.inclusiveXMin ? startX->point.coordinates[0] <= startXDimension : startX->point.coordinates[0] < startXDimension)) {
+            while (startX != nullptr && (r.inclusiveXMin ? startX->point.coordinates[0] < startXDimension : startX->point.coordinates[0] <= startXDimension)) {
                 startX = next(startX);
             }
             rangeNode *endX = findPoint(root, endXDimension, 0);
-            while (endX != nullptr && (r.inclusiveXMax ? endX->point.coordinates[0] >= endXDimension : endX->point.coordinates[0] > endXDimension)) {
+            while (endX != nullptr && (r.inclusiveXMax ? endX->point.coordinates[0] > endXDimension : endX->point.coordinates[0] >= endXDimension)) {
                 endX = prev(endX);
             }
 

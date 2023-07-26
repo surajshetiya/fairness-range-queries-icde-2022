@@ -599,7 +599,7 @@ int main(int argc, char *argv[]) {
                 vector<Point>* pointsRange = rt.findPointsInRange(edgeRange);
                 if(pointsRange->size() != 1) {
                     // Something is wrong here!
-                    cout << "Points in range " << pointsRange->size() << endl;
+                    // cout << "Points in range " << pointsRange->size() << endl;
                 } else {
                     int blues = topItem.blues, reds = topItem.reds;
                     if(pointsRange->at(0).isBlue) {
