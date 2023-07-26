@@ -97,9 +97,9 @@ struct sps {
 
     double distanceApproxNew() {
         int delta = blueWeight * blues - redWeight * reds;
-        if(abs(delta) < diff) {
+        if(abs(delta) <= diff) {
             // Already fair - return a distance of 0
-            return 0;
+            return double(intersection)/double(union_);
         }
         if(delta > diff) {
             // Case when dominanat color is blue
@@ -197,7 +197,8 @@ int main(int argc, char *argv[]) {
 
     cout << "[" << inputRange[0][0] << "," << inputRange[0][1] << "], [" << inputRange[1][0] << "," << inputRange[1][1] << "]" << endl;
 
-    double threshold = 0.1; // Distance threshold
+    // double threshold = 0.1; // Distance threshold
+    double threshold = 0.3; // Distance threshold
 
     double inputRangeCopy[2][dims];
 
@@ -308,6 +309,7 @@ int main(int argc, char *argv[]) {
     }
     //diff = ceil( itemsUnion * 6514. * percentageDiff/ 10000.);
     diff = ceil( 0.025 * itemsUnion);
+    diff = 19;
     cout << "Diff value chosen as " << diff << endl;
     cout << "Number of points in range " << pointsInRange->size() << endl;
     cout << "Input range " << blueCount << " blues and " << redCount << "reds with a total of " << itemsUnion << "points." << endl;
@@ -333,7 +335,7 @@ int main(int argc, char *argv[]) {
             minDiff = topItem.diffVal;
             cout << "Found a better range with disparity of " << minDiff << endl;
         }
-        if(topItem.distanceApprox() > threshold) {
+        if(topItem.distApproxToFair > threshold) {
             cout << "Cannot find fair range within threshold of " << threshold << endl;
             auto endTime = chrono::high_resolution_clock::now();
             auto duration = chrono::duration_cast<chrono::microseconds>(endTime - startTime); 
@@ -370,7 +372,7 @@ int main(int argc, char *argv[]) {
                     int itemID = *iter;
                     unionInputOutput.insert(itemID);
                 }
-                cout << "Verficication for similarity : " << double(intersectionInputOutput.size())/double(unionInputOutput.size()) << endl;
+                cout << "Verificication for similarity : " << double(intersectionInputOutput.size())/double(unionInputOutput.size()) << endl;
                 delete inputPointIDs;
                 delete outputPointIDs;
             }
@@ -600,6 +602,7 @@ int main(int argc, char *argv[]) {
                 if(pointsRange->size() != 1) {
                     // Something is wrong here!
                     // cout << "Points in range " << pointsRange->size() << endl;
+                    delete pointsRange;
                 } else {
                     int blues = topItem.blues, reds = topItem.reds;
                     if(pointsRange->at(0).isBlue) {
